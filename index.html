@@ -7,6 +7,11 @@
 </head>
 <body>
 <title>Servicontaplub</title>
+<meta name="build" content="2026-11-06a">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Estudio contable virtual para emprendedores y MYPEs en Perú. Contabilidad mensual, declaraciones SUNAT, planillas y asesoría tributaria.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -992,6 +997,27 @@ section{scroll-margin-top:72px}
 })();
 </script>
 
+<script>
+/* Si el navegador (por ejemplo el de TikTok) muestra una copia vieja, carga la versión más reciente */
+(function(){
+  function key(html){
+    var b = (html.match(/<meta name="build" content="([^"]+)"/) || [])[1] || "";
+    var a = (html.match(/"actualizado":\s*"([^"]+)"/) || [])[1] || "";
+    return b + "_" + a;
+  }
+  var mine = key(document.documentElement.outerHTML);
+  if (!window.fetch) return;
+  fetch(location.pathname + "?nc=" + Date.now(), {cache: "no-store"}).then(function(r){ return r.ok ? r.text() : ""; }).then(function(t){
+    if (!t) return;
+    var latest = key(t);
+    if (!latest || latest === "_" || latest === mine) return;
+    var params = new URLSearchParams(location.search);
+    if (params.get("v") === latest) return;
+    params.set("v", latest);
+    location.replace(location.pathname + "?" + params.toString() + location.hash);
+  }).catch(function(){});
+})();
+</script>
 <a class="fab" href="https://wa.me/51937744240?text=Hola%20Servicontaplub%2C%20quisiera%20informaci%C3%B3n." target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg><use href="#i-wa"/></svg></a>
 
 <script>
