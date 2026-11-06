@@ -7,7 +7,7 @@
 </head>
 <body>
 <title>Servicontaplub</title>
-<meta name="build" content="2026-11-06a">
+<meta name="build" content="2026-11-06b">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -494,7 +494,7 @@ section{scroll-margin-top:72px}
                 <input type="date" id="ctsIngreso" value="2025-03-10" min="1990-01-01" max="2026-10-31">
               </div>
             </div>
-            <label class="cts-switch" for="ctsAF"><span>Recibe asignación familiar<small>S/ 123 (10% de la RMV de S/ 1,230)</small></span><input type="checkbox" id="ctsAF" checked></label>
+            <label class="cts-switch" for="ctsAF"><span>Recibe asignación familiar<small id="ctsAFHint">S/ 123 (10% de la RMV de S/ 1,230)</small></span><input type="checkbox" id="ctsAF" checked></label>
             <label class="cts-switch" for="ctsGratiAuto"><span>Calcular la gratificación de julio por mí<small>Desactívalo para escribir el monto que recibió (sin el bono de 9%)</small></span><input type="checkbox" id="ctsGratiAuto" checked></label>
             <div class="field">
               <label for="ctsGrati">Gratificación de julio 2026 (sin bono de 9%)</label>
@@ -971,7 +971,16 @@ section{scroll-margin-top:72px}
 
   ["ctsSueldo","ctsIngreso","ctsGrati","ctsName"].forEach(function(id){ $(id).addEventListener("input", function(){ render(calc(), false); }); });
   ["ctsAF","ctsGratiAuto"].forEach(function(id){ $(id).addEventListener("change", function(){ $("ctsGrati").disabled = $("ctsGratiAuto").checked; render(calc(), false); }); });
-  document.querySelectorAll('input[name="ctsReg"]').forEach(function(r){ r.addEventListener("change", function(){ render(calc(), false); }); });
+  function afHint(){
+    var r = reg(), h = $("ctsAFHint");
+    if (r === "general") h.textContent = "S/ 123 (10% de la RMV de S/ 1,230). Obligatoria si tiene hijos menores o estudiando";
+    else h.textContent = "No es obligatoria en " + (r === "pequena" ? "pequeña empresa" : "microempresa") + ". Actívala solo si la empresa la paga";
+  }
+  document.querySelectorAll('input[name="ctsReg"]').forEach(function(r){ r.addEventListener("change", function(){
+    $("ctsAF").checked = reg() === "general";
+    afHint(); render(calc(), false);
+  }); });
+  afHint();
   $("ctsSueldo").addEventListener("blur", function(){ var n = num(this.value); if (n) this.value = n.toLocaleString("en-US"); });
   $("ctsName").addEventListener("focus", function(){ if (this.value === "@seguidor") this.select(); });
   $("ctsForm").addEventListener("submit", function(e){
