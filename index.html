@@ -7,7 +7,7 @@
 </head>
 <body>
 <title>Servicontaplub</title>
-<meta name="build" content="2026-11-06b">
+<meta name="build" content="2026-11-07a">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -495,10 +495,11 @@ section{scroll-margin-top:72px}
               </div>
             </div>
             <label class="cts-switch" for="ctsAF"><span>Recibe asignación familiar<small id="ctsAFHint">S/ 123 (10% de la RMV de S/ 1,230)</small></span><input type="checkbox" id="ctsAF" checked></label>
-            <label class="cts-switch" for="ctsGratiAuto"><span>Calcular la gratificación de julio por mí<small>Desactívalo para escribir el monto que recibió (sin el bono de 9%)</small></span><input type="checkbox" id="ctsGratiAuto" checked></label>
+            <label class="cts-switch" for="ctsGratiAuto"><span>Calcular la gratificación de julio por mí<small>O escribe abajo el monto exacto que recibiste (sin el bono de 9%)</small></span><input type="checkbox" id="ctsGratiAuto" checked></label>
             <div class="field">
               <label for="ctsGrati">Gratificación de julio 2026 (sin bono de 9%)</label>
-              <div class="money"><span>S/</span><input id="ctsGrati" inputmode="decimal" value="0" autocomplete="off" disabled></div>
+              <div class="money"><span>S/</span><input id="ctsGrati" inputmode="decimal" value="0" autocomplete="off"></div>
+                <p class="cts-hint" id="ctsGratiHint">Calculada automáticamente. ¿Te pagaron otro monto? Tócalo y escribe el que recibiste.</p>
             </div>
             <p class="cts-warn" id="ctsWarn" hidden></p>
             <div class="cts-actions">
@@ -969,8 +970,12 @@ section{scroll-margin-top:72px}
     if (on){ app.scrollTop = 0; $("ctsName").focus({preventScroll:true}); }
   }
 
-  ["ctsSueldo","ctsIngreso","ctsGrati","ctsName"].forEach(function(id){ $(id).addEventListener("input", function(){ render(calc(), false); }); });
-  ["ctsAF","ctsGratiAuto"].forEach(function(id){ $(id).addEventListener("change", function(){ $("ctsGrati").disabled = $("ctsGratiAuto").checked; render(calc(), false); }); });
+  ["ctsSueldo","ctsIngreso","ctsName"].forEach(function(id){ $(id).addEventListener("input", function(){ render(calc(), false); }); });
+  function gratiHint(){ $("ctsGratiHint").textContent = $("ctsGratiAuto").checked ? "Calculada automáticamente. ¿Te pagaron otro monto? Tócalo y escribe el que recibiste." : "Monto escrito a mano. Activa el interruptor de arriba para volver al cálculo automático."; }
+  $("ctsGrati").addEventListener("input", function(){ if ($("ctsGratiAuto").checked){ $("ctsGratiAuto").checked = false; gratiHint(); } render(calc(), false); });
+  $("ctsGrati").addEventListener("focus", function(){ this.select(); });
+  $("ctsGrati").addEventListener("blur", function(){ if (!$("ctsGratiAuto").checked){ this.value = money(num(this.value)); } });
+  ["ctsAF","ctsGratiAuto"].forEach(function(id){ $(id).addEventListener("change", function(){ gratiHint(); render(calc(), false); }); });
   function afHint(){
     var r = reg(), h = $("ctsAFHint");
     if (r === "general") h.textContent = "S/ 123 (10% de la RMV de S/ 1,230). Obligatoria si tiene hijos menores o estudiando";
