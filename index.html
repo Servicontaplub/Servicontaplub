@@ -7,7 +7,7 @@
 </head>
 <body>
 <title>Servicontaplub</title>
-<meta name="build" content="2026-11-20a">
+<meta name="build" content="2026-11-25a">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -354,6 +354,27 @@ section{scroll-margin-top:72px}
 /* Floating WhatsApp */
 .fab{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-content:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.4);z-index:30}
 .fab svg{width:30px;height:30px}
+
+/* Casos del Tribunal Fiscal */
+.casos-sec{padding:56px 0;background:var(--sheet);border-block:1px solid var(--line)}
+.casos{display:grid;gap:18px}
+@media (min-width:900px){.casos{grid-template-columns:1fr 1fr}}
+.caso{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;display:flex;flex-direction:column;gap:12px}
+.caso-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.caso-tag{font-family:var(--font-mono);font-size:.78rem;font-weight:600;background:var(--petrol-soft);color:var(--petrol);padding:3px 10px;border-radius:999px}
+.caso-res{font-size:.78rem;font-weight:700;padding:3px 10px;border-radius:999px}
+.caso-res.mal{background:#fde2e1;color:#9b1c1c}.caso-res.bien{background:#dcf5e6;color:#14632f}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .caso-res.mal{background:#3a1515;color:#f8b4b4}:root:not([data-theme="light"]) .caso-res.bien{background:#123a22;color:#9ee6b8}}
+.caso h3{font-size:1.3rem}
+.caso-q{font-size:.95rem;color:var(--muted);margin:0}
+.caso-block b{display:block;font-family:var(--font-display);font-size:.95rem;margin-bottom:4px}
+.caso-block ul{margin:0;padding-left:18px}
+.caso-block li{margin:3px 0}
+.caso-lesson{background:var(--sheet);border-left:4px solid var(--amber);border-radius:10px;padding:12px 14px}
+.caso-lesson b{display:block;margin-bottom:4px;color:var(--amber-ink)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .caso-lesson b{color:var(--amber)}}
+.caso-foot{font-size:.82rem;color:var(--muted);margin-top:auto}
+.caso-foot a{font-weight:600}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -370,6 +391,7 @@ section{scroll-margin-top:72px}
     </a>
     <nav class="navlinks" aria-label="Principal">
       <a href="#actualidad">Actualidad</a>
+      <a href="#casos">Casos</a>
       <a href="#gratificacion">Gratificación</a>
       <a href="#cts">CTS</a>
       <a href="#servicios">Servicios</a>
@@ -386,6 +408,7 @@ section{scroll-margin-top:72px}
       <a href="#vencimientos">📅 Mi vencimiento</a>
       <a href="#calculadora">📊 ¿Qué régimen me conviene?</a>
       <a href="#actualidad">📰 Noticias SUNAT</a>
+      <a href="#casos">⚖️ Casos del Tribunal</a>
       <a href="#servicios">Servicios</a>
       <a href="#contacto">Contacto</a>
     </div>
@@ -458,6 +481,18 @@ section{scroll-margin-top:72px}
         </aside>
         <div class="news" id="newsList"></div>
       </div>
+    </div>
+  </section>
+
+  <section id="casos" class="casos-sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Casos del Tribunal Fiscal</p>
+        <h2>Lo que le pasó a otros, para que no te pase a ti</h2>
+        <p class="lead">Resoluciones reales del Tribunal Fiscal explicadas en simple: qué pasó, qué decidió y qué debes hacer en tu negocio.</p>
+      </div>
+      <div class="casos" id="casosList"></div>
+      <p class="note" style="margin-top:18px">Resúmenes propios de Servicontaplub con fines informativos. No reemplazan la lectura de la resolución ni una asesoría para tu caso.</p>
     </div>
   </section>
 
@@ -763,6 +798,80 @@ section{scroll-margin-top:72px}
 
 
 <!-- NOTICIAS:INICIO (la tarea diaria reemplaza solo este bloque JSON) -->
+<script type="application/json" id="casos-data">
+{
+ "casos": [
+  {
+   "rtf": "RTF N.° 08570-10-2026",
+   "fecha": "Publicada en noviembre de 2026",
+   "tema": "Crédito fiscal · Registro de Compras",
+   "resultado": "A favor del contribuyente",
+   "tipo": "bien",
+   "titulo": "Corregir un periodo cerrado no te hace perder el crédito fiscal",
+   "pregunta": "¿Pierdes el IGV de una compra si la registras meses después para corregir un periodo anterior?",
+   "paso": [
+    "Una empresa anotó en su Registro de Compras de abril de 2018 facturas de marzo de 2017.",
+    "Usó el código 9, que indica que la anotación corrige un periodo anterior.",
+    "SUNAT le quitó el crédito fiscal porque consideró que la anotación estaba fuera de plazo."
+   ],
+   "dijo": [
+    "Lo que cuenta es el periodo al que corresponde la anotación, no el mes en que se hizo.",
+    "El sistema de SUNAT no permitía modificar directamente el registro de 2017, y la propia SUNAT lo reconoció.",
+    "Por eso el crédito fiscal se mantiene."
+   ],
+   "leccion": "Si SUNAT no te deja corregir un periodo cerrado, regístralo indicando el periodo original (en el SIRE, con un ajuste posterior) y guarda la constancia.",
+   "base": "Ley del IGV art. 19 · Ley 29215 art. 2",
+   "fuente": "Expertise Tributario",
+   "url": "https://www.expertisetributario.com/publicaciones/rtf-08570-10-2026-no-se-pierde-el-credito-fiscal-por-el-uso-del-codigo-9-en-el-registro-de-compras-electronico-para-rectificar-operaciones-registradas-en-periodos-anteriores/"
+  },
+  {
+   "rtf": "RTF N.° 00822-10-2024",
+   "fecha": "26 de enero de 2024",
+   "tema": "Beneficiario final · Multa",
+   "resultado": "Multa confirmada",
+   "tipo": "mal",
+   "titulo": "Suspender actividades no te libra de declarar el beneficiario final",
+   "pregunta": "Si tu empresa suspendió actividades o dio de baja su RUC, ¿igual debe declarar el beneficiario final?",
+   "paso": [
+    "Una empresa de Lambayeque, principal contribuyente al 30/11/2019, no presentó su declaración de beneficiario final en diciembre de 2019.",
+    "Alegó que tenía suspensión de actividades desde 2017 y que luego dio de baja su RUC.",
+    "También dijo que nunca se enteró de la esquela de SUNAT."
+   ],
+   "dijo": [
+    "La suspensión de actividades solo exime de algunas declaraciones determinativas, no de las informativas como el beneficiario final.",
+    "La baja posterior del RUC no borra una infracción ya cometida.",
+    "La notificación en el buzón SOL es válida aunque no la hayas leído; como no subsanó a tiempo, no hubo rebaja de la multa."
+   ],
+   "leccion": "Antes de suspender o cerrar tu empresa, revisa qué declaraciones tienes pendientes y entra a tu buzón SOL cada semana: subsanar dentro del plazo te da la rebaja.",
+   "base": "Código Tributario art. 176 num. 2 y art. 104 · D. Leg. 1372",
+   "fuente": "Resumen de Tawa (tawa.pe)",
+   "url": "https://tawa.pe"
+  }
+ ]
+}
+</script>
+<script>
+(function(){
+  var list = document.getElementById("casosList"); if (!list) return;
+  var d; try { d = JSON.parse(document.getElementById("casos-data").textContent); } catch(e){ return; }
+  function el(t, c, txt){ var e = document.createElement(t); if (c) e.className = c; if (txt != null) e.textContent = txt; return e; }
+  function ul(items){ var u = el("ul"); items.forEach(function(x){ u.appendChild(el("li", null, x)); }); return u; }
+  d.casos.forEach(function(c){
+    var a = el("article", "caso");
+    var top = el("div", "caso-top");
+    top.append(el("span", "caso-tag", c.rtf), el("span", "caso-tag", c.tema), el("span", "caso-res " + c.tipo, c.resultado));
+    var h = el("h3", null, c.titulo);
+    var q = el("p", "caso-q", "❓ " + c.pregunta);
+    var b1 = el("div", "caso-block"); b1.append(el("b", null, "Qué pasó"), ul(c.paso));
+    var b2 = el("div", "caso-block"); b2.append(el("b", null, "Qué dijo el Tribunal Fiscal"), ul(c.dijo));
+    var l = el("div", "caso-lesson"); l.append(el("b", null, "💡 Lección para tu negocio"), document.createTextNode(c.leccion));
+    var f = el("p", "caso-foot"); f.append(document.createTextNode(c.fecha + " · Base legal: " + c.base + " · Fuente: "));
+    var link = el("a", null, c.fuente); link.href = c.url; link.target = "_blank"; link.rel = "noopener"; f.appendChild(link);
+    a.append(top, h, q, b1, b2, l, f);
+    list.appendChild(a);
+  });
+})();
+</script>
 <script type="application/json" id="noticias-data">
 {
  "actualizado": "2026-11-25",
